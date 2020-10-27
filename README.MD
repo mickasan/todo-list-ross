@@ -1,8 +1,7 @@
 # TODO List ROSS
-Application TODO list
 
-INSTALL 
+# INSTALL 
 yarn install
 
-START
+# START
 yarn start
