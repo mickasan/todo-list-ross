@@ -1,0 +1,29 @@
+{
+  "name": "todo-list-ross",
+  "version": "1.0.0",
+  "description": "Todo list ross",
+  "main": "dist/app.js",
+  "repository": {
+    "url": "https://github.com/mickasan/todo-list-ross",
+    "type": "git"
+  },
+  "author": "MickaSan",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist/",
+    "start": "tsc && node dist/app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "typescript": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=12.19.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.8",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0",
+    "tslint": "^6.1.3"
+  }
+}

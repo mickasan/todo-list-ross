@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Todo App">
+    <meta name="author" content="MickaSan">
+    <link href="todoapp.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>TODO APP</title>
+</head>
+<body>
+<div class="container-fluid">
+    <main>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <h1>Todos</h1>
+                </div>
+                <div id="create_todo">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input id="new_todo" placeholder="ToDo" type="text"/>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="todo_description" placeholder="Description" type="text">
+                        </div>
+                        <div class="col-md-4">
+                            <input id="add_todo" class="btn btn btn-primary" type="button" value="New todo"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Tache</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody id="todo_list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="todo.js"></script>
+</body>
+</html>
