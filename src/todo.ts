@@ -13,41 +13,23 @@ class Tasks{
         let totalCount: number = Tasks.allTasks.push(newItem);
         return totalCount;
     }
-    allTodoItems():Task[]{
-        return Tasks.allTasks;
-    }
-}
-window.onload = function(){
-    let task= <HTMLInputElement>document.getElementById("new_todo");
-    let description = <HTMLInputElement>document.getElementById("todo_description");
-    document.getElementById("add_todo").addEventListener('click',()=>toAlltask(task.value, description.value));
-    retriveAllSavedTasks();
-    updateTasks();
 }
 
 function toAlltask(task:string, description:string){
     let todo = new Tasks();
     todo.createTodoItem(task, description);
-    renderList(Tasks.allTasks);
+    renderList(false);
     saveStaksToSession(Tasks.allTasks);
     (<HTMLInputElement>document.getElementById("new_todo")).value = "";
     (<HTMLInputElement>document.getElementById("todo_description")).value=""; 
 }
 
-function retriveAllSavedTasks(){
-    const allTaskSaved = JSON.parse(sessionStorage.getItem('tasks'));
-    console.log('allTaskSaved : ', allTaskSaved);
-    renderList(allTaskSaved)
-}
-
 function saveStaksToSession(data :any){
     localStorage.clear();
     sessionStorage.setItem('tasks', JSON.stringify(data));
-    const allTaskSaved = JSON.parse(sessionStorage.getItem('tasks'));
-    console.log('allTaskSaved : ', allTaskSaved);
 }
 
-function updateTasks (){
+function updateTasks(){
     let tasks = <HTMLInputElement>document.getElementById("todo_list");
     tasks.addEventListener('click', (event: { target: any; }) => {
         const target = event.target;
@@ -65,18 +47,34 @@ function updateTasks (){
       });
 }
 
-function renderList(data:any) {
-    if(data.length>0){
+function renderList(fromSession:boolean) {
+    let data:any;
+    data = fromSession 
+        ? JSON.parse(sessionStorage.getItem('tasks'))
+        : Tasks.allTasks ;
+
+    if(data){
         let list='';
         let div = <HTMLDivElement>document.getElementById("todo_list");
         for (let i = 0; i < data.length; i++){
-            let newItem = new Task(data[i].name,data[i].description, data[i].completed);
-            Tasks.allTasks.push(newItem);
+            if(fromSession){
+                let newItem = new Task(data[i].name,data[i].description, data[i].completed);
+                Tasks.allTasks.push(newItem);
+            }
             list += data[i].completed ? '<tr class="bg-success">' : '<tr>';
             list += data[i].completed ? '<td><input type="checkbox" id="' + i + '" name="task" checked></td>':'<td><input type="checkbox" id="' + i + '" name="task" ></td>';
             list += '<td>' + data[i].name + '</td><td>' + data[i].description + '</td>';
             list += '</tr>';
+
           }
           div.innerHTML = list;
     }
+}
+
+window.onload = function() {
+    let task= <HTMLInputElement>document.getElementById("new_todo");
+    let description = <HTMLInputElement>document.getElementById("todo_description");
+    document.getElementById("add_todo").addEventListener('click',()=>toAlltask(task.value, description.value));
+    renderList(true);
+    updateTasks();
 }
